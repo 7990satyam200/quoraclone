@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ board.name }}-{{block.super}}
+{% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item active">{{ board.name }}</li>
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
+  </div>
+
+
+
+  <div class="card-columns">
+  {% for topic in board.topics.all %}
+  <div class="card border-success mb-3" style="max-width: 18rem;">
+  <div class="card-header bg-transparent border-success">{{ topic.last_updated }}</div>
+  <div class="card-body text-success">
+    <h5 class="card-title">
+
+  <a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a>
+
+    </h5>
+    <p class="card-text">{{topic.description}}</p>
+    <a href="{% url 'reply_topic' board.pk topic.pk  %}" class="btn btn-primary">Reply</a>
+
+  </div>
+  <div class="card-footer bg-transparent border-success">{{ topic.starter.username }}</div>
+</div>
+  {% endfor %}
+
+</div>
+  {% endblock %}

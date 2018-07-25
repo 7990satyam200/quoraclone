@@ -1,0 +1,23 @@
+ {% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Boards</li>
+{% endblock %}
+
+{% block content %}
+  
+  <div class="card-columns">
+  {% for board in boards %}
+  <div class="card" style="width: 50rem;">
+  <div class="card-body" >
+    <h5 class="card-title">
+      <a href="{% url 'board_topic' board.pk %}">{{ board.name }}</a>
+    </h5>
+    <p class="card-text">{{ board.details }}.</p>
+    <a href="{% url 'board_topic' board.pk %}" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
